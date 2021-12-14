@@ -1,6 +1,6 @@
 # Project 2: Continuous Control
 
-![Trained](images\trained.gif)
+![Trained](images/trained.gif)
 
 ### Introduction
 
@@ -38,4 +38,4 @@ Follow the instructions in `Continuous_Control.ipynb` to get started with traini
 |`agent/model.py`|Actor Critic PyTorch network|
 |`agent/trainer.py`|Training utility class|
 |`checkpoints/ppo_checkpoint_159.pth`|trained PPO agent weights|
-|`images/trained.gif`|animated trained agent visualization|
+|`imagestrained.gif`|animated trained agent visualization|
