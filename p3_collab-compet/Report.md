@@ -38,7 +38,7 @@ Following are the parameters used:
 |minibatch epochs|4|
 |eps clip|0.1|
 |trajectory length|1000|
-|trajectory batch size|100|
+|trajectory batch size|200|
 
 
 ## Results
