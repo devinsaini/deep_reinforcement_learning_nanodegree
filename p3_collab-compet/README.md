@@ -44,3 +44,5 @@ Follow the instructions in `Tennis.ipynb` to get started with training your own 
 |`agent/buffers.py`|Rollout and trajectory buffers|
 |`checkpoints/ppo_checkpoint_12199.pth`|trained PPO agent weights|
 |`images/trained.gif`|animated trained agent visualization|
+|`images/score_plot.png`|training score plot|
+|`images/metrics.png`|training metrics plot|
