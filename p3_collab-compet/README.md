@@ -32,7 +32,7 @@ Follow the instructions in README.md at the root of the repository to setup the 
     - Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Windows_x86_64.zip)
     
 
-2. Place the file in the DRLND GitHub repository, in the `p2_continuous-control/` folder, and unzip (or decompress) the file. Enter the path of the file in the `Continuous_Control.ipynb` notebook while initializing the environment.
+2. Place the file in the DRLND GitHub repository, in the `p2_continuous-control/` folder, and unzip (or decompress) the file. Enter the path of the file in the `Tennis.ipynb` notebook while initializing the environment.
    ```
    env = UnityEnvironment(file_name="Tennis.exe")
    ```
