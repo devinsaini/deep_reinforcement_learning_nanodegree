@@ -4,7 +4,7 @@ from agent.buffers import TrajectoryBuffer
 
 class Trainer:
     """Training helper"""
-    def __init__(self, agent, device, trajectory_length, batch_size=32, tau=None) -> None:
+    def __init__(self, agent, device, trajectory_length, batch_size=32) -> None:
         """Initialize the trainer
 
         Args:
@@ -12,14 +12,12 @@ class Trainer:
             device (torch.device): device to train on
             trajectory_length (int): length of trajectory
             batch_size (int): batch size
-            tau (float, optional): Generalized advantage estimation factor. Defaults to None.
         """
         self.agent = agent
         self.trajectory_buffer = TrajectoryBuffer()
         self.device = device
         self.trajectory_length = trajectory_length
         self.batch_size = batch_size
-        self.tau = tau
 
         self.metrics = {
             'loss': [],
@@ -37,7 +35,6 @@ class Trainer:
             logprob (array_like): log probabilities
             reward (array_like): rewards
             state_values (array_like): state values
-            next_state_values (array_like): next state values
             done (array_like): done flags
         """
         self.trajectory_buffer.current_trajectory.add(state, action, logprob, reward, state_values, done)
@@ -52,12 +49,18 @@ class Trainer:
         
 
     def update(self, states, actions, logprobs, rewards, state_values, masks):
-        """Prepare the batch and update the agent"""
+        """Prepare batch and update the agent
 
-        # calculate discounted returns
-        #if self.tau:
-        #    returns = self.calc_gae_returns(rewards, next_state_values, dones, self.tau)
-        #else:
+        Args:
+            states (array_like): state values
+            actions (array_like): action values
+            logprobs (array_like): log probabilities
+            rewards (array_like): rewards
+            state_values (array_like): state values
+            masks (array_like): masks to avoid updating on done
+        """
+
+        # Calculate discounted returns
         returns = self.calc_returns(rewards)
 
         # create Tensors
@@ -69,9 +72,8 @@ class Trainer:
 
         # calculate advantage
         advantages = returns - torch.FloatTensor(state_values)
-        advantages = advantages * masks
+        advantages = advantages * masks     # mask the advantages for done trajectories to avoid updating the policy
         advantages = advantages.detach().to(self.device)
-        #advantages = (advantages - advantages.mean()) / advantages.std()
 
         # update policy
         train_info = self.agent.update(states, actions, logprobs, returns, advantages, masks)
@@ -90,7 +92,6 @@ class Trainer:
 
         Args:
             rewards (array_like): rewards
-            next_state_values (array_like): next state values
 
         Returns:
             array_like: discounted returns
@@ -100,25 +101,4 @@ class Trainer:
         for i in reversed(range(len(rewards))):
             returns_i = rewards[i] + self.agent.gamma * returns_i
             returns[i] = returns_i
-        return returns
-        
-
-    def calc_gae_returns(self, rewards, next_state_values, dones, tau):
-        """Calculate discounted returns with Generalized Advantage Estimation
-
-        Args:
-            rewards (array_like): rewards
-            next_state_values (array_like): next state values
-            dones (array_like): done flags
-            tau (float): Generalized advantage estimation factor
-
-        Returns:
-            array_like: discounted returns
-        """
-        gae = 0
-        returns = []
-        for i in reversed(range(len(rewards))):
-            delta = rewards[i] + self.agent.gamma * next_state_values[i] * (1 - dones[i][0]) - self.rollout_buffer.state_values[i]
-            gae = delta + self.agent.gamma * tau * (1 - dones[i][0]) * gae
-            returns.insert(0, gae + self.rollout_buffer.state_values[i])
         return returns

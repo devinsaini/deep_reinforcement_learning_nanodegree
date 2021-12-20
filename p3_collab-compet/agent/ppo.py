@@ -61,6 +61,7 @@ class PPO:
             old_logprobs (array_like): log probabilities of actions
             returns (array_like): discounted future returns
             advantages (array_like): discounted advantages
+            masks (array_like): masks for preventing updates to padded states
 
         Returns:
             dict: loss and entropy of last update iteration
