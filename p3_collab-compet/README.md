@@ -18,12 +18,12 @@ The task is episodic, and in order to solve the environment, the agents must get
 The environment is considered solved, when the average (over 100 episodes) of those **scores** is at least +0.5.
 
 
-## Dependencies
+### Dependencies
 
-To set up your python environment to run the code in this repository, follow the instructions in README.md at the root of the repository.
+Follow the instructions in README.md at the root of the repository to setup the dependencies if not already setup.
 
 
-### Getting Started
+### Install Environment
 
 1. Download the environment from one of the links below.  You need only select the environment that matches your operating system:
     - Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Linux.zip)
