@@ -17,6 +17,12 @@ The task is episodic, and in order to solve the environment, the agents must get
 
 The environment is considered solved, when the average (over 100 episodes) of those **scores** is at least +0.5.
 
+
+## Dependencies
+
+To set up your python environment to run the code in this repository, follow the instructions in README.md at the root of the repository.
+
+
 ### Getting Started
 
 1. Download the environment from one of the links below.  You need only select the environment that matches your operating system:
@@ -28,7 +34,7 @@ The environment is considered solved, when the average (over 100 episodes) of th
 
 2. Place the file in the DRLND GitHub repository, in the `p2_continuous-control/` folder, and unzip (or decompress) the file. Enter the path of the file in the `Continuous_Control.ipynb` notebook while initializing the environment.
    ```
-   env = UnityEnvironment(file_name="Reacher.exe")
+   env = UnityEnvironment(file_name="Tennis.exe")
    ```
 
 ### Instructions
