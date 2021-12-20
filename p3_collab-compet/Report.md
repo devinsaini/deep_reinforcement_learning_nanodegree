@@ -26,7 +26,7 @@ For each episode, we collect experience data in currently active trajectory buff
 
 For dealing with this, we pad the shorter trajectories with zeros. We also create a mask that indicates which experience values are valid in the combined trajectory. When learning from the combined trajectory, we multiply the mask to **advantages** for masking policy updates from empty states, and with **state_values** for masking value updates from empty states. 
 
-Each episode trajectory two agent trajectories, one for each agent. In our final solution, we used 200 trajectories per training batch. This approach helped reduce the learning variance a lot and our agent performed significantly better.
+Each episode trajectory contains two agent trajectories, one for each agent. In our final solution, we used 200 trajectories per training batch. This approach helped reduce the learning variance a lot and our agent performed significantly better.
 
 Following are the parameters used:
 
